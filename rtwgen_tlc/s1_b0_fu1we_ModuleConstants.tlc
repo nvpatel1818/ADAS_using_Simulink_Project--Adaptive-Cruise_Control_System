@@ -1,0 +1,17 @@
+%implements s1_b0_fu1we_ModuleConstants "C"
+
+%function ModuleConstants(block) Output
+
+
+/* Named constants for Chart: '<S1>/Control Algorithm' */
+#define ACC_IN_LeadVehicle_Not_Detected ((uint8_T)3U)
+#define ACC_System_IN_ACC_OFF_Mode ((uint8_T)1U)
+#define ACC_System_IN_ACC_ON_Mode ((uint8_T)2U)
+#define ACC_System_IN_ACC_STANDBY_Mode ((uint8_T)3U)
+#define ACC_System_IN_NO_ACTIVE_CHILD ((uint8_T)0U)
+#define IN_LeadVehicle_Detected_Follow ((uint8_T)1U)
+#define IN_LeadVehicle_Detected_Resume ((uint8_T)2U)
+#define IN_LeadVehicle_Not_Detected_Res ((uint8_T)4U)
+#define IN_LeadVehicle_Speed_equal_Set_ ((uint8_T)5U)
+#define IN_LeadVehicle_Speed_lessthan_S ((uint8_T)6U)
+%endfunction

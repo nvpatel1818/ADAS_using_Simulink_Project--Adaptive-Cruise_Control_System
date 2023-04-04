@@ -1,0 +1,68 @@
+
+31-Mar-2023 09:55:55
+Validating cached model representation from 31-Mar-2023 09:54:11...change detected
+
+31-Mar-2023 09:55:57
+Checking compatibility for design error detection: model 'WCS'
+Compiling model...done
+Building model representation...done
+
+31-Mar-2023 09:56:10
+'WCS' is compatible for design error detection with Simulink Design Verifier.
+
+
+Detecting design errors using model representation from 31-Mar-2023 09:56:10...
+
+DEAD LOGIC
+Wiper_Control_System/High Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = 00:00:11
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = 00:00:11
+
+DEAD LOGIC
+Wiper_Control_System/No Rain/Switch
+logical trigger input false (output is from 3rd input port)
+Analysis Time = 00:00:11
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = 00:00:11
+
+UNDECIDED
+Wiper_Control_System/High Rain/Switch
+logical trigger input false (output is from 3rd input port)
+Analysis Time = N/A
+
+UNDECIDED
+Wiper_Control_System/Medium Rain/Switch
+logical trigger input false (output is from 3rd input port)
+Analysis Time = N/A
+
+UNDECIDED
+Wiper_Control_System/Low Rain/Switch
+logical trigger input false (output is from 3rd input port)
+Analysis Time = N/A
+
+UNDECIDED
+Wiper_Control_System/No Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = N/A
+
+
+31-Mar-2023 09:56:28
+
+Completed normally.
+
+Generating output files:
+
+31-Mar-2023 09:56:31
+Results generation completed.
+
+    Data file:
+    /Users/jamesbond/Desktop/sldv_output/WCS/WCS_sldvdata7.mat
+

@@ -1,0 +1,30 @@
+
+31-Mar-2023 10:59:13
+Checking compatibility for design error detection: model 'untitled'
+Compiling model...done
+Building model representation...done
+
+31-Mar-2023 10:59:29
+'untitled' is compatible for design error detection with Simulink Design Verifier.
+
+
+Detecting design errors using model representation from 31-Mar-2023 10:59:29...
+
+VALID
+Wiper_Control_System/Low Rain/Relational Operator
+Overflow
+Analysis Time = 00:00:45
+
+
+31-Mar-2023 11:00:24
+
+Completed normally.
+
+Generating output files:
+
+31-Mar-2023 11:00:35
+Results generation completed.
+
+    Data file:
+    /Users/jamesbond/Desktop/sldv_output/untitled/untitled_sldvdata.mat
+

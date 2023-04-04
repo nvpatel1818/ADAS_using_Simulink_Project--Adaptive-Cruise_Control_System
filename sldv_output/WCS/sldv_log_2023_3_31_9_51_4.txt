@@ -1,0 +1,133 @@
+
+31-Mar-2023 09:49:14
+Validating cached model representation from 31-Mar-2023 09:39:29...done
+
+31-Mar-2023 09:49:18
+'WCS' is compatible for design error detection with Simulink Design Verifier.
+
+
+Detecting design errors using model representation from 31-Mar-2023 09:39:29...
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Logical Operator
+expression for output with input port 2 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Logical Operator
+Logic: input port 2 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Logical Operator
+expression for output with input port 2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Logical Operator
+Logic: input port 2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Relational Operator1
+RelationalOperator: input1 <= input2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/High Rain/Relational Operator
+RelationalOperator: input1 > input2 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Logical Operator
+expression for output with input port 2 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Logical Operator
+Logic: input port 2 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/No Rain/Relational Operator
+RelationalOperator: input1 == input2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Logical Operator
+expression for output with input port 1 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Logical Operator
+Logic: input port 1 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Relational Operator
+RelationalOperator: input1 < input2 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/High Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Switch
+logical trigger input true (output is from 1st input port)
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Logical Operator
+expression for output with input port 2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Logical Operator
+expression for output with input port 1 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Logical Operator
+Logic: input port 2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Low Rain/Relational Operator1
+RelationalOperator: input1 <= input2 false
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Logical Operator
+Logic: input port 1 true
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/No Rain/Switch
+logical trigger input false (output is from 3rd input port)
+Analysis Time = 00:00:15
+
+DEAD LOGIC
+Wiper_Control_System/Medium Rain/Relational Operator
+RelationalOperator: input1 < input2 true
+Analysis Time = 00:00:15
+
+
+31-Mar-2023 09:49:39
+
+Error detection was stopped.
+
+Generating output files:
+
+31-Mar-2023 09:51:03
+Results generation completed.
+
+    Data file:
+    /Users/jamesbond/Desktop/sldv_output/WCS/WCS_sldvdata5.mat
+

@@ -1,0 +1,164 @@
+%implements s1_b0_fu1we_Outputs "C"
+
+%function Outputs(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%<SLibCG_TrackEO(3)>\
+/* {S!d12}Sum: '<S3>/Add' incorporates:
+ *  Inport: '<Root>/CameraInput_LeadVehicle'
+ *  Inport: '<Root>/RadarInput_LeadVehicle'
+ */
+%<SLibCG_DumpSSCode("/*@[12abe*/",SLibCG_SetBOCSC(0, 1, "", -1, "", 0, "/*@>13312*/(uint8_T)(/*@>13314*/CameraInput_LeadVehicle/*@>13313*/ + /*@>13315*/RadarInput_LeadVehicle)"),"/*@]*/")>\
+/* {S!d14}UnitDelay: '<S1>/Unit Delay' */
+%<SLibCG_DumpSSCode("/*@[12ada*/",SLibCG_SetBOCSC(1, 1, "", -1, "", 0, "/*@>13328*/ACC_System_Y./*@>13327*/Acceleration_Mode_h"),"/*@]*/")>\
+/* {S!d16}Sum: '<S4>/Add' incorporates:
+ *  Inport: '<Root>/CameraInput_DriveVehicle'
+ *  Inport: '<Root>/RadarInput_DriveVehicle'
+ */
+%<SLibCG_DumpSSCode("/*@[12b12*/",SLibCG_SetBOCSC(2, 1, "", -1, "", 0, "/*@>1333b*/(uint8_T)(/*@>1333d*/(uint8_T)(/*@>1333f*/CameraInput_DriveVehicle/*@>1333e*/ + /*@>13340*/RadarInput_DriveVehicle)/*@>1333c*/ + %<SLibCG_DumpSSCode("/*@[13341*/",(SLibCG_SE(SLibCG_BOCSC(1, 1, "", -1, "", 0))),"/*@]*/")>)"),"/*@]*/")>\
+/* {S!d18}SignalConversion: '<S4>/Signal Conversion' incorporates:
+ *  Inport: '<Root>/RadarInput_DriveVehicle'
+ */
+%<SLibCG_DumpSSCode("/*@[12b2e*/",SLibCG_SetBOCSC(3, 1, "", -1, "", 0, "/*@>1335d*/RadarInput_DriveVehicle"),"/*@]*/")>\
+/* {S!d20}Chart: '<S1>/Control Algorithm' incorporates:
+ *  Inport: '<Root>/CruiseSwitch'
+ *  Inport: '<Root>/SetSwitch'
+ *  Inport: '<Root>/Set_Gap'
+ *  Inport: '<Root>/Set_Speed'
+ *  Inport: '<Root>/Time_Gap'
+ *  UnitDelay: '<S1>/Unit Delay'
+ */
+/*@>8c2b*/if (/*@>12096*/ACC_System_DW./*@>132a7*/is_active_c3_ACC_System/*@>8c29*/ == /*@>cd4b*/0U) {
+    /*@>120a6*/ACC_System_DW./*@>132ad*/is_active_c3_ACC_System/*@>8c34*/ = /*@>1305b*/1U;
+    /*@>120b0*/ACC_System_DW./*@>132b0*/is_c3_ACC_System/*@>8c5b*/ = /*@>cd6c*/ACC_System_IN_ACC_OFF_Mode;
+    /*@>11ed9*/ACC_System_Y./*@>1325f*/Acceleration_Mode_h/*@>8c77*/ = /*@>13064*/0U;
+} else {
+/*@>8c2c*/    switch (/*@>1209e*/ACC_System_DW./*@>132aa*/is_c3_ACC_System) {
+      case /*@>cd4c*/ACC_System_IN_ACC_OFF_Mode:
+        /*@>11eba*/ACC_System_Y./*@>13259*/Acceleration_Mode_h/*@>8c3b*/ = /*@>1305e*/0U;
+        /*@>8c36*/if (/*@>cd57*/CruiseSwitch) {
+            /*@>120c6*/ACC_System_DW./*@>132b6*/is_c3_ACC_System/*@>8c39*/ = /*@>cd54*/ACC_System_IN_ACC_STANDBY_Mode;
+            /*@>11efb*/ACC_System_Y./*@>13262*/Acceleration_Mode_h/*@>8dc3*/ = /*@>13067*/1U;
+        }
+        break;
+      case /*@>cd4d*/ACC_System_IN_ACC_ON_Mode: {
+        /*@>8c41*/if (!/*@<8c53*//*@>cd66*/SetSwitch) {
+            /*@>120bc*/ACC_System_DW./*@>132b3*/is_ACC_ON_Mode/*@>8c71*/ = /*@>cd7b*/ACC_System_IN_NO_ACTIVE_CHILD;
+            /*@>120de*/ACC_System_DW./*@>132bf*/is_c3_ACC_System/*@>8c4d*/ = /*@>cd62*/ACC_System_IN_ACC_STANDBY_Mode;
+            /*@>11f2e*/ACC_System_Y./*@>13274*/Acceleration_Mode_h/*@>8dc0*/ = /*@>13079*/1U;
+        } else /*@>8c42*/if (!/*@<8c56*//*@>cd68*/CruiseSwitch) {
+            /*@>120d6*/ACC_System_DW./*@>132bc*/is_ACC_ON_Mode/*@>8c75*/ = /*@>cd7e*/ACC_System_IN_NO_ACTIVE_CHILD;
+            /*@>120f0*/ACC_System_DW./*@>132c5*/is_c3_ACC_System/*@>8c51*/ = /*@>cd65*/ACC_System_IN_ACC_OFF_Mode;
+            /*@>11f55*/ACC_System_Y./*@>1327d*/Acceleration_Mode_h/*@>8dc6*/ = /*@>13082*/0U;
+        } else {
+/*@>8c43*/            switch (/*@>120ce*/ACC_System_DW./*@>132b9*/is_ACC_ON_Mode) {
+              case /*@>cd59*/IN_LeadVehicle_Detected_Follow:
+                /*@>11f03*/ACC_System_Y./*@>13265*/Acceleration_Mode_h/*@>8c84*/ = /*@>1306a*/2U;
+                /*@>8c7a*/if (%<SLibCG_DumpSSCode("/*@[12d5c*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>8c87*/ == /*@>cd8b*/0) {
+                    /*@>12114*/ACC_System_DW./*@>132ce*/is_ACC_ON_Mode/*@>8c7e*/ = /*@>cd83*/ACC_IN_LeadVehicle_Not_Detected;
+                    /*@>11f89*/ACC_System_Y./*@>13283*/Acceleration_Mode_h/*@>8dd3*/ = /*@>13088*/1U;
+                } else /*@>8c7b*/if (((%<SLibCG_DumpSSCode("/*@[12d94*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>9fe2*/ == /*@>ce1c*/1)/*@>9fe1*/ && (%<SLibCG_DumpSSCode("/*@[12d78*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>9fe7*/ < /*@>ce1f*/Set_Speed))/*@>9fe0*/ || (/*@>ce21*/Time_Gap/*@>9fee*/ < /*@>ce23*/Set_Gap)) {
+                    /*@>1213c*/ACC_System_DW./*@>132da*/is_ACC_ON_Mode/*@>8c82*/ = /*@>cd86*/IN_LeadVehicle_Speed_lessthan_S;
+                    /*@>11fb9*/ACC_System_Y./*@>1328f*/Acceleration_Mode_h/*@>8ddc*/ = /*@>13094*/4U;
+                }
+                break;
+              case /*@>cd5a*/IN_LeadVehicle_Detected_Resume:
+                /*@>11f0b*/ACC_System_Y./*@>13268*/Acceleration_Mode_h/*@>8cb2*/ = /*@>1306d*/3U;
+                /*@>8ca3*/if (%<SLibCG_DumpSSCode("/*@[12cb4*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>8cb5*/ == /*@>cd99*/0) {
+                    /*@>1211e*/ACC_System_DW./*@>132d1*/is_ACC_ON_Mode/*@>8ca8*/ = /*@>cd8e*/IN_LeadVehicle_Not_Detected_Res;
+                    /*@>11f97*/ACC_System_Y./*@>13286*/Acceleration_Mode_h/*@>8dd6*/ = /*@>1308b*/1U;
+                } else /*@>8ca4*/if ((%<SLibCG_DumpSSCode("/*@[12d08*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>9ff8*/ < /*@>ce27*/Set_Speed)/*@>9ff7*/ && (%<SLibCG_DumpSSCode("/*@[12cec*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>9fff*/ > %<SLibCG_DumpSSCode("/*@[12cd0*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>)/*@>9ff6*/ && (/*@>ce2d*/Time_Gap/*@>a006*/ >= /*@>ce2f*/Set_Gap)) {
+                    /*@>12146*/ACC_System_DW./*@>132dd*/is_ACC_ON_Mode/*@>8cac*/ = /*@>cd91*/IN_LeadVehicle_Speed_equal_Set_;
+                    /*@>11fc4*/ACC_System_Y./*@>13292*/Acceleration_Mode_h/*@>8ddf*/ = /*@>13097*/5U;
+                } else /*@>8ca5*/if ((%<SLibCG_DumpSSCode("/*@[12d40*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>a010*/ == /*@>ce33*/Set_Speed)/*@>a00f*/ && (%<SLibCG_DumpSSCode("/*@[12d24*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>a017*/ >= /*@>ce37*/Set_Speed)/*@>a00e*/ && (/*@>ce39*/Time_Gap/*@>a01e*/ >= /*@>ce3b*/Set_Gap)) {
+                    /*@>12160*/ACC_System_DW./*@>132e6*/is_ACC_ON_Mode/*@>8cb0*/ = /*@>cd94*/IN_LeadVehicle_Detected_Follow;
+                    /*@>11fe1*/ACC_System_Y./*@>1329b*/Acceleration_Mode_h/*@>8deb*/ = /*@>130a0*/2U;
+                }
+                break;
+              case /*@>cd5b*/ACC_IN_LeadVehicle_Not_Detected:
+                /*@>11f13*/ACC_System_Y./*@>1326b*/Acceleration_Mode_h/*@>8cf5*/ = /*@>13070*/1U;
+                /*@>8ceb*/if ((%<SLibCG_DumpSSCode("/*@[12c60*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>a029*/ == /*@>ce3f*/1)/*@>a028*/ && (%<SLibCG_DumpSSCode("/*@[12c44*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>a02e*/ == /*@>ce42*/Set_Speed)/*@>a027*/ && (%<SLibCG_DumpSSCode("/*@[12c28*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>a035*/ >= /*@>ce46*/Set_Speed)/*@>a026*/ && (/*@>ce48*/Time_Gap/*@>a03c*/ >= /*@>ce4a*/Set_Gap)) {
+                    /*@>12128*/ACC_System_DW./*@>132d4*/is_ACC_ON_Mode/*@>8cef*/ = /*@>cd9c*/IN_LeadVehicle_Detected_Follow;
+                    /*@>11fa2*/ACC_System_Y./*@>13289*/Acceleration_Mode_h/*@>8de2*/ = /*@>1308e*/2U;
+                } else /*@>8cec*/if (((%<SLibCG_DumpSSCode("/*@[12c98*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>a046*/ == /*@>ce4e*/1)/*@>a045*/ && (%<SLibCG_DumpSSCode("/*@[12c7c*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>a04b*/ < /*@>ce51*/Set_Speed))/*@>a044*/ || (/*@>ce53*/Time_Gap/*@>a052*/ < /*@>ce55*/Set_Gap)) {
+                    /*@>1214e*/ACC_System_DW./*@>132e0*/is_ACC_ON_Mode/*@>8cf3*/ = /*@>cd9f*/IN_LeadVehicle_Speed_lessthan_S;
+                    /*@>11fcc*/ACC_System_Y./*@>13295*/Acceleration_Mode_h/*@>8dee*/ = /*@>1309a*/4U;
+                }
+                break;
+              case /*@>cd5c*/IN_LeadVehicle_Not_Detected_Res:
+                /*@>11f1b*/ACC_System_Y./*@>1326e*/Acceleration_Mode_h/*@>8d2d*/ = /*@>13073*/1U;
+                break;
+              case /*@>cd5d*/IN_LeadVehicle_Speed_equal_Set_:
+                /*@>11f23*/ACC_System_Y./*@>13271*/Acceleration_Mode_h/*@>8d3f*/ = /*@>13076*/5U;
+                /*@>8d30*/if (((%<SLibCG_DumpSSCode("/*@[12b80*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>a05c*/ < /*@>ce59*/Set_Speed)/*@>a05b*/ && (%<SLibCG_DumpSSCode("/*@[12b64*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>a063*/ < %<SLibCG_DumpSSCode("/*@[12b48*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>))/*@>a05a*/ || (/*@>e0aa*/(int32_T)%<SLibCG_DumpSSCode("/*@[12f2f*/",(SLibCGCallSubFcn("rt_roundd_snf", ["/*@>13368*/0.75/*@>13367*/ * /*@>13369*/(real_T)/*@>1336a*/Set_Gap"], 0, 1, 0)),"/*@]*/")>/*@>a06a*/ == /*@>ce5f*/Time_Gap)) {
+                    /*@>12132*/ACC_System_DW./*@>132d7*/is_ACC_ON_Mode/*@>8d35*/ = /*@>cda6*/IN_LeadVehicle_Speed_lessthan_S;
+                    /*@>11fb0*/ACC_System_Y./*@>1328c*/Acceleration_Mode_h/*@>8dd9*/ = /*@>13091*/4U;
+                } else /*@>8d31*/if (((%<SLibCG_DumpSSCode("/*@[12bd4*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>a078*/ < /*@>ce66*/Set_Speed)/*@>a077*/ && (%<SLibCG_DumpSSCode("/*@[12bb8*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>a07f*/ > %<SLibCG_DumpSSCode("/*@[12b9c*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>))/*@>a076*/ || (/*@>ce6c*/Time_Gap/*@>a086*/ >= /*@>ce6e*/Set_Gap)) {
+                    /*@>12158*/ACC_System_DW./*@>132e3*/is_ACC_ON_Mode/*@>8d39*/ = /*@>cda9*/IN_LeadVehicle_Detected_Resume;
+                    /*@>11fd7*/ACC_System_Y./*@>13298*/Acceleration_Mode_h/*@>8de8*/ = /*@>1309d*/3U;
+                } else /*@>8d32*/if ((%<SLibCG_DumpSSCode("/*@[12c0c*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>a08f*/ == /*@>ce72*/0)/*@>a08e*/ || (%<SLibCG_DumpSSCode("/*@[12bf0*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>a094*/ <= /*@>ce75*/Set_Speed)) {
+                    /*@>12168*/ACC_System_DW./*@>132e9*/is_ACC_ON_Mode/*@>8d3d*/ = /*@>cdac*/IN_LeadVehicle_Not_Detected_Res;
+                    /*@>11fe9*/ACC_System_Y./*@>1329e*/Acceleration_Mode_h/*@>8df4*/ = /*@>130a3*/1U;
+                }
+                break;
+              default: {
+                int32_T tmp;
+                int32_T tmp_0;
+                uint8_T tmp_1;
+                uint8_T tmp_2;
+                /* case IN_LeadVehicle_Speed_lessthan_Set_Speed: */
+                /*@>11f41*/ACC_System_Y./*@>1327a*/Acceleration_Mode_h/*@>8d8f*/ = /*@>1307f*/4U;
+                /*@>cecc*/tmp/*@>cece*/ = /*@>e0b4*/(int32_T)%<SLibCG_DumpSSCode("/*@[12f46*/",(SLibCGCallSubFcn("rt_roundd_snf", ["/*@>13375*/(real_T)%<SLibCG_DumpSSCode("/*@[13376*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>13374*/ * /*@>13381*/1.25"], 0, 1, 1)),"/*@]*/")>;
+                /*@>cf18*/tmp_0/*@>cf1a*/ = /*@>e13e*/(int32_T)%<SLibCG_DumpSSCode("/*@[12f5d*/",(SLibCGCallSubFcn("rt_roundd_snf", ["/*@>1338c*/1.25/*@>1338b*/ * /*@>1338d*/(real_T)/*@>1338e*/Set_Gap"], 0, 1, 2)),"/*@]*/")>;
+                /*@>f126*/if (/*@>e9de*/tmp/*@>e9dc*/ < /*@>e9df*/256) {
+                    /*@>f12a*/tmp_1/*@>f129*/ = /*@>e9e0*/(uint8_T)/*@>e9e2*/tmp;
+                } else {
+                    /*@>f117*/tmp_1/*@>f119*/ = /*@>e9e3*/MAX_uint8_T;
+                }
+                /*@>f12b*/if (/*@>e9e7*/tmp_0/*@>e9e5*/ < /*@>e9e8*/256) {
+                    /*@>f12f*/tmp_2/*@>f12e*/ = /*@>e9e9*/(uint8_T)/*@>e9eb*/tmp_0;
+                } else {
+                    /*@>f11f*/tmp_2/*@>f121*/ = /*@>e9ec*/MAX_uint8_T;
+                }
+                /*@>8d85*/if ((/*@>f11b*/tmp_1/*@>9f9e*/ >= %<SLibCG_DumpSSCode("/*@[12e20*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>)/*@>9f9d*/ && (/*@>e14d*/(int32_T)%<SLibCG_DumpSSCode("/*@[12f74*/",(SLibCGCallSubFcn("rt_roundd_snf", ["/*@>13399*/(real_T)%<SLibCG_DumpSSCode("/*@[1339a*/",(SLibCG_SE(SLibCG_BOCSC(0, 1, "", -1, "", 0))),"/*@]*/")>/*@>13398*/ * /*@>133a5*/0.75"], 0, 1, 3)),"/*@]*/")>/*@>9fa9*/ <= %<SLibCG_DumpSSCode("/*@[12de8*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>)/*@>9f9c*/ && (%<SLibCG_DumpSSCode("/*@[12dcc*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>9fb4*/ < /*@>ce07*/Set_Speed)/*@>9f9b*/ && (/*@>ce09*/Time_Gap/*@>9fbb*/ <= /*@>f123*/tmp_2)/*@>9f9a*/ && (/*@>ce0e*/Time_Gap/*@>9fc6*/ >= /*@>e15c*/(int32_T)%<SLibCG_DumpSSCode("/*@[12f8b*/",(SLibCGCallSubFcn("rt_roundd_snf", ["/*@>133b0*/0.75/*@>133af*/ * /*@>133b1*/(real_T)/*@>133b2*/Set_Gap"], 0, 1, 4)),"/*@]*/")>)) {
+                    /*@>12174*/ACC_System_DW./*@>132ec*/is_ACC_ON_Mode/*@>8d89*/ = /*@>cdb1*/IN_LeadVehicle_Speed_equal_Set_;
+                    /*@>12000*/ACC_System_Y./*@>132a1*/Acceleration_Mode_h/*@>8de5*/ = /*@>130a6*/5U;
+                } else /*@>8d86*/if ((%<SLibCG_DumpSSCode("/*@[12e58*/",(SLibCG_SE(SLibCG_BOCSC(3, 1, "", -1, "", 0))),"/*@]*/")>/*@>9fd3*/ == /*@>ce15*/0)/*@>9fd2*/ && (%<SLibCG_DumpSSCode("/*@[12e3c*/",(SLibCG_SE(SLibCG_BOCSC(2, 1, "", -1, "", 0))),"/*@]*/")>/*@>9fd8*/ == /*@>ce18*/Set_Speed)) {
+                    /*@>1217c*/ACC_System_DW./*@>132ef*/is_ACC_ON_Mode/*@>8d8d*/ = /*@>cdb4*/ACC_IN_LeadVehicle_Not_Detected;
+                    /*@>12008*/ACC_System_Y./*@>132a4*/Acceleration_Mode_h/*@>8df1*/ = /*@>130a9*/1U;
+                }
+}
+                break;
+            }
+        }
+}
+        break;
+      default:
+        /* case IN_ACC_STANDBY_Mode: */
+        /*@>11ec8*/ACC_System_Y./*@>1325c*/Acceleration_Mode_h/*@>8c67*/ = /*@>13061*/1U;
+        /*@>8c5d*/if (!/*@<8c6a*//*@>cd75*/CruiseSwitch) {
+            /*@>120e8*/ACC_System_DW./*@>132c2*/is_c3_ACC_System/*@>8c61*/ = /*@>cd6f*/ACC_System_IN_ACC_OFF_Mode;
+            /*@>11f39*/ACC_System_Y./*@>13277*/Acceleration_Mode_h/*@>8dc9*/ = /*@>1307c*/0U;
+        } else /*@>8c5e*/if (/*@>cd77*/SetSwitch) {
+            /*@>120f8*/ACC_System_DW./*@>132c8*/is_c3_ACC_System/*@>8c65*/ = /*@>cd72*/ACC_System_IN_ACC_ON_Mode;
+            /*@>12108*/ACC_System_DW./*@>132cb*/is_ACC_ON_Mode/*@>8dce*/ = /*@>cdc1*/IN_LeadVehicle_Detected_Follow;
+            /*@>11f7b*/ACC_System_Y./*@>13280*/Acceleration_Mode_h/*@>8dd0*/ = /*@>13085*/2U;
+        }
+        break;
+    }
+}
+/* {E!d20}End of Chart: '<S1>/Control Algorithm' */
+%<SLibInsertSolverResetCode()>\
+%closefile cfgTxt
+%<cfgTxt>
+%<LibSetSystemField(system, "CachedOutputLocalVars", localVarDecl)>
+%endfunction
+%function OutputsFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Outputs(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 1, fcnProtoType)>
+%endfunction
